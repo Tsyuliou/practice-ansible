@@ -1,0 +1,36 @@
+---
+# tasks file for nexus
+
+- name: Create a user nexus   
+  become: yes              
+  user: 
+    name: nexus
+    password: "{{ 'nexus' | password_hash('sha512', 'mysecretsalt') }}"
+
+- name: create project directory
+  become: yes
+  file: state=directory path="{{ nexus_dir }}" owner=nexus group=nexus mode=0755
+  changed_when: no
+
+- name: download sources Nexus
+  become: yes
+  get_url: url="{{ nexus_url }}" dest="{{ nexus_dir }}" owner=nexus group=nexus mode=0755
+  changed_when: no
+
+- name: unzip Nexus
+  become: yes
+  become_user: nexus
+  unarchive:
+    src: /opt/nexus/nexus-3.15.2-01-unix.tar.gz
+    dest: /opt/nexus
+    remote_src: yes
+  changed_when: no
+
+- name: Deploy Systemd File nexus.service
+  become: yes
+  template:
+    src: nexus.service.j2
+    dest: /usr/lib/systemd/system/nexus.service
+  notify:
+    - systemd daemon reload
+    - nexus start

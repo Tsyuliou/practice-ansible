@@ -1,0 +1,4 @@
+---
+# vars file for jenkins-user
+jen_home: /home/jenkins  
+jenkins_artifacts: /opt/jenkins/artifacts

@@ -1,0 +1,4 @@
+.vagrant
+playbooks/*.retry
+trash/*
+jenkins.data/*

@@ -1,0 +1,13 @@
+[Unit]
+Description=Sonar Daemon
+
+[Service]
+Type=simple
+ExecStart=/opt/sonar/sonarqube-6.7.6/bin/linux-x86-64/sonar.sh start
+ExecStop=/opt/sonar/sonarqube-6.7.6/bin/linux-x86-64/sonar.sh stop
+PIDFile=/opt/sonar/sonarqube-6.7.6/bin/linux-x86-64/./SonarQube.pid
+User=sonar
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

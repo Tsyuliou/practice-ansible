@@ -1,0 +1,45 @@
+---
+# tasks file for postrgeSQL
+- name: Installation postrgeSQL
+  become: yes
+  yum:
+    name:
+      - postgresql-server
+      - postgresql-contrib
+
+- name: init postrgeSQL
+  become: yes
+  command: postgresql-setup initdb
+  args: 
+    creates: /var/lib/pgsql/data/PG_VERSION
+
+- name: start service postrgeSQL
+  become: yes
+  service: name=postgresql state=started enabled=yes  
+  changed_when: false
+
+- name: Create a user sonar   
+  become: yes              
+  user: 
+    name: sonar    
+    password: "{{ 'sonar' | password_hash('sha512', 'mysecretsalt') }}"
+
+- name: PostgreSQL configuration
+  become: yes
+  become_user: postgres
+  shell: |
+    psql -c "create user sonar"
+    psql -c "alter user sonar with encrypted password 'sonar'"
+    psql -c "alter role sonar with createdb"
+    psql -c "create database sonar owner sonar"
+    psql -c "grant all privileges on database sonar to sonar"
+  changed_when: no
+
+- name: change config postgreSQL
+  become: yes
+  template:
+    src: pg_hba.conf.j2
+    dest: /var/lib/pgsql/data/pg_hba.conf
+  notify:
+    - postrgeSQL service restart
+

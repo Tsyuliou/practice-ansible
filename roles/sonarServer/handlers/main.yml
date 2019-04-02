@@ -1,0 +1,13 @@
+---
+# handlers file for sonarServer
+- name: systemd daemon reload
+  systemd: daemon_reload=yes
+  become: yes
+
+- name: sonar start
+  service: name=sonar state=started enabled=yes
+  become: yes
+  
+- name: sonar service restart
+  service: name=sonar state=restarted
+  become: yes

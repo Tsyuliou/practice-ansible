@@ -1,0 +1,12 @@
+[Unit]
+Description=Sonar Daemon
+
+[Service]
+Type=simple
+ExecStart=/opt/nexus/nexus-3.15.2-01/bin/nexus start
+ExecStop=/opt/nexus/nexus-3.15.2-01/bin/nexus stop
+User=nexus
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

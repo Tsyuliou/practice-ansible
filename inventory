@@ -1,0 +1,16 @@
+[all:children]
+j-job
+nodes
+
+[all:vars]
+ansible_connection=paramiko
+ansible_user=root
+ansible_ssh_pass=vagrant
+
+[j-job]
+master ansible_host=192.168.56.66 #ansible_user=jenkins
+
+[nodes]
+sonar ansible_host=192.168.56.10 #ansible_user=jenkins
+nexus ansible_host=192.168.56.20 #ansible_user=jenkins
+tomcatic ansible_host=192.168.56.30

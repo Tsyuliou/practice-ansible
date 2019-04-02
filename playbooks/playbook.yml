@@ -1,0 +1,46 @@
+# - name: Create user Jenkins, and so on.
+#   hosts: j-job
+#   roles: 
+#     - jenkins-user
+#     - java
+#     - jenkins
+#     - nginx
+
+# - name: Add jenkins user and dependency on slaves
+#   hosts: nodes
+#   roles:
+#     - jenkins-user    
+#     - java
+
+# - name: Automated Code Analysis
+#   hosts: sonar
+#   roles:
+#     - postrgeSQL
+#     - sonarServer
+#     - nginx-sonar  
+
+# - name: Nexus
+#   hosts: nexus
+#   roles: 
+#     - nexus
+#     - nginx-nexus
+
+- name: Tomcatic
+  hosts: tomcatic 
+  roles:
+    - tomcat
+
+# - hosts: all
+#   become: yes  
+#   post_tasks:
+#     - name: custom script
+#       shell: /vagrant/trash/tools.sh
+#       changed_when: no
+
+
+# First time run as root 
+# ansible-playbook playbook.yml 
+# -e ansible_user=root -k
+# enter in postgresql
+# sudo su postgres
+# psql

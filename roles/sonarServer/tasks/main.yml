@@ -1,0 +1,67 @@
+---
+# tasks file for sonarServer
+- name: create project directory
+  become: yes
+  file: state=directory path="{{ sonar_dir }}" owner=sonar group=sonar mode=0755
+  changed_when: no
+
+- name: download sources Sonar
+  become: yes
+  get_url: url="{{ sonar_url }}" dest="{{ sonar_dir }}" owner=sonar group=sonar mode=0755
+  changed_when: no
+  # args:
+  #   creates: /opt/sonar/sonarqube-7.6.zip
+  
+- name: unzip Sonar
+  become: yes
+  become_user: sonar
+  unarchive:
+    src: /opt/sonar/sonarqube-6.7.6.zip
+    dest: /opt/sonar
+    remote_src: yes
+  changed_when: no
+
+- name: Deploy Systemd File sonar.service
+  become: yes
+  template:
+    src: sonar.service.j2
+    dest: /usr/lib/systemd/system/sonar.service
+  notify:
+    - systemd daemon reload
+    - sonar start
+
+- name: change config sonar
+  become: yes
+  template:
+    src: sonar.properties.j2
+    dest: /opt/sonar/sonarqube-6.7.6/conf/sonar.properties
+  changed_when: no
+  notify:
+    - sonar service restart
+
+
+
+
+
+
+
+
+
+# - name: create project directory
+#   become: yes
+#   file: state=directory path="{{ scanner_dir }}" owner=sonar group=sonar mode=0755
+#   changed_when: no  
+
+# - name: download sources SonarScanner
+#   become: yes
+#   get_url: url="{{ scanner_url }}" dest="{{ scanner_dir }}" owner=sonar group=sonar mode=0755
+#   changed_when: no
+
+# - name: unzip Sonar Scanner
+#   become: yes
+#   become_user: sonar
+#   unarchive:
+#     src: /opt/scanner/sonar-scanner-cli-3.3.0.1492-linux.zip
+#     dest: /opt/scanner
+#     remote_src: yes
+#   changed_when: no    

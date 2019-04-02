@@ -1,0 +1,8 @@
+---
+# vars file for sonarServer
+sonar_dir: /opt/sonar 
+#scanner_dir: /opt/scanner
+
+sonar_url: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-6.7.6.zip
+#sonar_url: https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.6.zip
+#scanner_url: https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-3.3.0.1492-linux.zip
