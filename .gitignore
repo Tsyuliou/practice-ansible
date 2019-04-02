@@ -1,7 +1,0 @@
-jenkins-installation/*.retry
-jenkins-installation/trash/*
-jenkins-installation/preparation.yml
-jenkins-installation/jenkinsdeploy.yml
-jenkins-installation/jenkins.data/*
-jenkins-installation/files/*
-jenkins-installation/installation.yml
