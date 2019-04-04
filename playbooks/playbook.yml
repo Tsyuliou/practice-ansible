@@ -1,52 +1,51 @@
-# - name: Add common role to all servers
-#   hosts: all
-#   roles:
-#     - common    
+- hosts: all
+  become: yes
+  pre_tasks:
+    - name: Create /etc/ansible/facts.d
+      file:
+        path: /etc/ansible/facts.d
+  state: directory
 
-# - name: Create user Jenkins, and so on
-#   hosts: j-job
-#   roles:
-#     - jenkins
-#     - nginx
+- name: Add common role to all servers
+  hosts: all
+  roles:
+    - role: common
+      tags: pre-install    
 
-# - name: Automated Code Analysis
-#   hosts: sonar
-#   roles:
-#     - sonarServer     
+- name: Create user Jenkins, and so on
+  hosts: j-job
+  roles:
+    - jenkins        
+    - nginx
+  tags: install
 
-# - name: Nexus
-#   hosts: nexus
-#   roles: 
-#     - nexus 
+- name: Automated Code Analysis
+  hosts: sonar
+  roles:
+    - sonarServer     
+      tags: install
 
-# - name: Tomcat
-#   hosts: tomcat 
-#   roles:
-#     - tomcat
+- name: Nexus
+  hosts: nexus
+  roles: 
+    - role: nexus 
+      tags: install   
 
-# - name: deploy to tomcat
-#   hosts: deploy 
-#   roles:
-#     - deployTomcat
+- name: Tomcat
+  hosts: tomcat 
+  roles:
+    - role: tomcat
+      tags: install
 
-# - hosts: all
-#   become: yes  
-#   post_tasks:
-#     - name: custom script
-#       shell: /vagrant/trash/tools.sh
-#       changed_when: no
+- name: deploy to tomcat
+  hosts: deploy 
+  roles:
+    - role: deployTomcat
+      tags: never
 
-
-# First time run as root 
-# ansible-playbook playbook.yml 
-# -e ansible_user=root -k
-# enter in postgresql
-# sudo su postgres
-# psql
-
-# -------------------- Test Zone -------------------- #
-# - name: add deploy.yml  
-#   import_playbook: deploy.yml
-  # when: jenkins_check is not defined
-
-
+- hosts: all
+  become: yes  
+  post_tasks:
+    - name: custom script
+      shell: /vagrant/trash/tools.sh
+      changed_when: no

@@ -23,6 +23,9 @@
   become: yes
   shell: "curl -T '/tmp/{{ fio }}/helloworld-ws/target/helloworld-ws.war' 'http://lexx:123456@192.168.56.30:8080/manager/text/deploy?path=/{{ fio }}&update=true&tag={{ last }}'"
   register: deploy_output
+  until: '"OK" in deploy_output.stdout'
+  retries: 5
+  delay: 10
   failed_when: '"OK" not in deploy_output.stdout'
 
 - name: undeploy
