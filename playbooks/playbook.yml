@@ -1,34 +1,28 @@
-- name: Add common role to all servers
-  hosts: all
-  roles:
-    - common    
-
-- name: Create user Jenkins, and so on
-  hosts: j-job
-  roles:
-    - jenkins
-    - nginx
-
-# - name: Add jenkins user and dependency on slaves
-#   hosts: nodes
+# - name: Add common role to all servers
+#   hosts: all
 #   roles:
-#     - jenkins-user    
-#     - java
+#     - common    
 
-- name: Automated Code Analysis
-  hosts: sonar
-  roles:
-    - sonarServer     
+# - name: Create user Jenkins, and so on
+#   hosts: j-job
+#   roles:
+#     - jenkins
+#     - nginx
+
+# - name: Automated Code Analysis
+#   hosts: sonar
+#   roles:
+#     - sonarServer     
 
 - name: Nexus
   hosts: nexus
   roles: 
     - nexus 
 
-- name: Tomcat
-  hosts: tomcat 
-  roles:
-    - tomcat
+# - name: Tomcat
+#   hosts: tomcat 
+#   roles:
+#     - tomcat
 
 # - hosts: all
 #   become: yes  
@@ -46,7 +40,3 @@
 # psql
 
 # -------------------- Test Zone -------------------- #
-# - name: test something
-#   hosts: tomcat 
-#   roles:
-#     - user

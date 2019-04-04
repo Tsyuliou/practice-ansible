@@ -1,2 +1,2 @@
 - import_tasks: install_java.yml
-  # when: java_version is not defined
+  when: java_version is not defined

@@ -1,0 +1,27 @@
+- name: create project directory
+  become: yes
+  file: state=directory path="{{ nexus_dir }}" owner=nexus group=nexus mode=0755
+  changed_when: no
+
+- name: download sources Nexus
+  become: yes
+  get_url: url="{{ nexus_url }}" dest="{{ nexus_dir }}" owner=nexus group=nexus mode=0755
+  changed_when: no
+
+- name: unzip Nexus
+  become: yes
+  become_user: nexus
+  unarchive:
+    src: "{{ nexus_src }}"
+    dest: "{{ nexus_dir }}"    
+    remote_src: yes
+  changed_when: no
+
+- name: Deploy Systemd File nexus.service
+  become: yes
+  template:
+    src: nexus.service.j2
+    dest: "{{ nexus_service_dest }}"
+  notify:
+    - systemd daemon reload
+    - nexus start

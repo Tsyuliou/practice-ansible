@@ -1,4 +1,2 @@
----
-# tasks file for jenkins
 - import_tasks: install_jenkins.yml
   when: jenkins_check is not defined
