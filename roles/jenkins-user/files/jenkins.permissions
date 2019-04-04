@@ -1,3 +1,0 @@
-## Allow jenkins to run any commands anywhere 
-jenkins        ALL=(ALL)       NOPASSWD: ALL
-
