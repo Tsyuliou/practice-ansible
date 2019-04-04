@@ -1,2 +1,6 @@
 ---
 # defaults file for tomcat
+username : tomcat
+passwd: "{{users.tomcat.passwd}}"
+id: "{{users.tomcat.id}}"
+sudoers: "{{users.tomcat.sudo}}"

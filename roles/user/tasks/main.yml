@@ -1,0 +1,80 @@
+---
+# tasks file for user
+- name: Create  group for user {{ username }} 
+  become: yes
+  group:
+    name: "{{ username }}"
+    state: present
+    gid: "{{ id }}"
+
+- name: Create a user {{ username }} 
+  become: yes              
+  user: 
+    name: "{{ username }}"
+    uid: "{{ id }}"    
+    group: "{{ id }}"
+    password: "{{ passwd }}"
+
+- name: Add sudoers priveleges  in a separate file
+  copy:
+    dest: "/etc/sudoers.d/{{ username }}"
+    content: "{{ sudoers }}"
+  with_items: "{{ sudoers|default([]) }}"
+  become: yes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# - name: Create .ssh directory for user {{user_name}}
+#   become: yes       
+#   file:
+#     path: "/home/{{ user_name}}/.ssh"
+#     state: directory
+#     mode: "{{ permission }}"
+#     uid: "{{ user_id }}"
+#     group: "{{ group_id }}"
+
+# - name: Copy public key to remote hosts
+#   become: yes  
+#   copy:
+#     src: /home/student/.ssh/id_rsa.pub
+#     dest: "/home/{{ user_name }}/.ssh/authorized_keys"
+#     owner: "{{ user_name }}"
+#     group: "{{ user_name }}"
+#     mode: "{{ permission }}"
+# - debug: msg="{{ sudoers }}"
+#   with_items: "{{ sudoers|default([]) }}"
+

@@ -1,5 +1,0 @@
----
-# handlers file for nginx-sonar
-- name: nginx restart
-  service: name=nginx state=started enabled=yes
-  become: yes

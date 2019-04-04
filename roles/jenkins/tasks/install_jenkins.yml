@@ -1,0 +1,48 @@
+- name: Deploy Systemd File jenkins.service
+  become: yes
+  template:
+    src: jenkins.service.j2
+    dest: "{{ jenkins_service_path }}"
+  register: jenkins_check
+
+- name: Fix jenkins folder permissions
+  become: yes
+  file:
+    path: "{{ jenkins_home }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"        
+    mode: 0755        
+    recurse: yes
+    state: directory
+  changed_when: False
+
+- name: Add jenkins.war 
+  become: yes
+  copy:
+    src: jenkins.war
+    dest: "/home/{{ username }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"    
+  changed_when: False
+
+- name: Create directory for artifacts_home
+  become: yes       
+  file:
+    path: "{{ artifacts_home }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0755
+
+- name: Start Jenkins service and enable on boot  
+  service:
+    name: jenkins
+    state: started
+    enabled: yes
+  become: yes
+
+# - name: Registration fact
+#   shell: ls "{{ jenkins_service_path }}"
+#   register: jenkins_check
+
+- debug: msg="jenkins_check"

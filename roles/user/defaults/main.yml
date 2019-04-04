@@ -1,0 +1,6 @@
+---
+# defaults file for user
+# username : devops
+# passwd: "{{users.devops.passwd}}"
+# id: "{{users.devops.id}}"
+# sudoers: "{{users.devops.sudo}}"

@@ -1,0 +1,12 @@
+---
+# tasks file for common
+- name: install dependency 
+  become: yes  
+  yum:
+    name:      
+      - wget  
+      - vim 
+      - unzip  
+      - git
+    state: installed
+  changed_when: False  

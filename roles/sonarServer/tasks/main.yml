@@ -19,6 +19,8 @@
     src: /opt/sonar/sonarqube-6.7.6.zip
     dest: /opt/sonar
     remote_src: yes
+  args:
+    creates: /opt/sonar/sonarqube-6.7.6/bin/linux-x86-64/sonar.sh
   changed_when: no
 
 - name: Deploy Systemd File sonar.service

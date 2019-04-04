@@ -1,0 +1,16 @@
+- name: install dependency 
+  become: yes  
+  yum:
+    name:
+      - java-{{java_version}}-openjdk-devel
+    state: installed
+  changed_when: False   
+
+- name: Get Java version
+  shell: java -version 2>&1 | grep version | awk '{print $3}' | sed 's/"//g'
+  register: java_version.stdout
+  changed_when: no
+
+- name: Debug module / check java version
+  debug: msg="{{ java_version }}"   
+  tags: never

@@ -1,10 +1,13 @@
-# - name: Create user Jenkins, and so on.
-#   hosts: j-job
-#   roles: 
-#     - jenkins-user
-#     - java
-#     - jenkins
-#     - nginx
+- name: Add common role to all servers
+  hosts: all
+  roles:
+    - common    
+
+- name: Create user Jenkins, and so on
+  hosts: j-job
+  roles:
+    - jenkins
+    - nginx
 
 # - name: Add jenkins user and dependency on slaves
 #   hosts: nodes
@@ -12,21 +15,18 @@
 #     - jenkins-user    
 #     - java
 
-# - name: Automated Code Analysis
-#   hosts: sonar
-#   roles:
-#     - postrgeSQL
-#     - sonarServer
-#     - nginx-sonar  
+- name: Automated Code Analysis
+  hosts: sonar
+  roles:
+    - sonarServer     
 
-# - name: Nexus
-#   hosts: nexus
-#   roles: 
-#     - nexus
-#     - nginx-nexus
+- name: Nexus
+  hosts: nexus
+  roles: 
+    - nexus 
 
-- name: Tomcatic
-  hosts: tomcatic 
+- name: Tomcat
+  hosts: tomcat 
   roles:
     - tomcat
 
@@ -44,3 +44,9 @@
 # enter in postgresql
 # sudo su postgres
 # psql
+
+# -------------------- Test Zone -------------------- #
+# - name: test something
+#   hosts: tomcat 
+#   roles:
+#     - user

@@ -1,2 +1,6 @@
 ---
 # defaults file for sonarServer
+username : sonar
+passwd: "{{users.sonar.passwd}}"
+id: "{{users.sonar.id}}"
+sudoers: "{{users.sonar.sudo}}"

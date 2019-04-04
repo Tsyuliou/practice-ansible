@@ -1,2 +1,6 @@
 ---
 # defaults file for jenkins
+username : jenkins
+passwd: "{{users.jenkins.passwd}}"
+id: "{{users.jenkins.id}}"
+sudoers: "{{users.jenkins.sudo}}"

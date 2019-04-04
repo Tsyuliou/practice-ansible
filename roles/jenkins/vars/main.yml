@@ -2,4 +2,7 @@
 # vars file for jenkins
 URL: https://pkg.jenkins.io/redhat/jenkins.repo
 KEY: https://pkg.jenkins.io/redhat/jenkins.io.key
-JAVAOPT: "-Duser.home=/opt/jenkins -Xms1000m -Xmx1500m -jar /opt/jenkins/jenkins.war"
+JAVAOPT: "-Duser.home=/opt/jenkins -Xms1000m -Xmx1500m -jar {{ jenkins_home }}/jenkins.war"
+artifacts_home: "{{ jenkins_home }}/artifacts"
+jenkins_home: /opt/jenkins
+jenkins_service_path: /usr/lib/systemd/system/jenkins.service

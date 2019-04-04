@@ -15,14 +15,7 @@
     path: "{{ jen_home }}/.ssh"
     state: directory
 
-- name: Create directory jenkins_artifacts
-  become: yes       
-  file:
-    path: "{{ jenkins_artifacts }}"
-    state: directory
-    owner: jenkins
-    group: jenkins
-    mode: 0755
+
 
 - name: Copy public key to remote hosts
   become: yes  
