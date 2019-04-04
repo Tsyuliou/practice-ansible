@@ -4,13 +4,14 @@
     - name: Create /etc/ansible/facts.d
       file:
         path: /etc/ansible/facts.d
-  state: directory
+        state: directory
+  tags: pre-install
 
 - name: Add common role to all servers
   hosts: all
   roles:
     - role: common
-      tags: pre-install    
+  tags: pre-install    
 
 - name: Create user Jenkins, and so on
   hosts: j-job
@@ -23,25 +24,25 @@
   hosts: sonar
   roles:
     - sonarServer     
-      tags: install
+  tags: install
 
 - name: Nexus
   hosts: nexus
   roles: 
     - role: nexus 
-      tags: install   
+  tags: install   
 
 - name: Tomcat
   hosts: tomcat 
   roles:
     - role: tomcat
-      tags: install
+  tags: install
 
 - name: deploy to tomcat
   hosts: deploy 
   roles:
     - role: deployTomcat
-      tags: never
+  tags: never
 
 - hosts: all
   become: yes  
@@ -49,3 +50,4 @@
     - name: custom script
       shell: /vagrant/trash/tools.sh
       changed_when: no
+  tags: pre-install
