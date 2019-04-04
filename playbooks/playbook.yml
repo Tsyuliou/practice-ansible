@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: farm
   become: yes
   pre_tasks:
     - name: Create /etc/ansible/facts.d
@@ -8,7 +8,7 @@
   tags: pre-install
 
 - name: Add common role to all servers
-  hosts: all
+  hosts: farm
   roles:
     - role: common
   tags: pre-install    
@@ -44,10 +44,9 @@
     - role: deployTomcat
   tags: never
 
-- hosts: all
+- hosts: farm
   become: yes  
   post_tasks:
     - name: custom script
       shell: /vagrant/trash/tools.sh
-      changed_when: no
-  tags: pre-install
+      changed_when: no  

@@ -1,4 +1,4 @@
-[all:children]
+[farm:children]
 j-job
 nodes
 
