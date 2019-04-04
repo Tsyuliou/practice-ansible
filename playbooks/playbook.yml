@@ -44,9 +44,9 @@
     - role: deployTomcat
   tags: never
 
-- hosts: farm
-  become: yes  
-  post_tasks:
-    - name: custom script
-      shell: /vagrant/trash/tools.sh
-      changed_when: no  
+# - hosts: farm
+#   become: yes  
+#   post_tasks:
+#     - name: custom script
+#       shell: /vagrant/trash/tools.sh
+#       changed_when: no  

@@ -44,6 +44,6 @@ localhost                          = 192.168.56.1
 [constants](roles/constants)
 ### deployTomcat - in this Role we deploy in Tomcat use vars which we need to set up and if something failes we Roleback to previous version which we defined earlier too. Not so good as possible, but first sollution which i could realized
   - "ansible-playbook playbook/playbook.yml --tags=never -e fio="set_name" -e last="set_number_of_last_build" -e lt="set_last_success_version"
- ``` 
-[deployTomcat](roles/deployTomcat)
-```
+ 
+#### [deployTomcat](roles/deployTomcat)
+
