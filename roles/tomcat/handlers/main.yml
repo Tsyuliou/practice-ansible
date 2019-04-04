@@ -7,3 +7,7 @@
 - name: tomcat-start
   service: name=tomcat state=started enabled=yes
   become: yes
+
+- name: tomcat-restart
+  service: name=tomcat state=restarted 
+  become: yes

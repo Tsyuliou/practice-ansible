@@ -14,15 +14,20 @@
 #   roles:
 #     - sonarServer     
 
-- name: Nexus
-  hosts: nexus
-  roles: 
-    - nexus 
+# - name: Nexus
+#   hosts: nexus
+#   roles: 
+#     - nexus 
 
 # - name: Tomcat
 #   hosts: tomcat 
 #   roles:
 #     - tomcat
+
+# - name: deploy to tomcat
+#   hosts: deploy 
+#   roles:
+#     - deployTomcat
 
 # - hosts: all
 #   become: yes  
@@ -40,3 +45,8 @@
 # psql
 
 # -------------------- Test Zone -------------------- #
+# - name: add deploy.yml  
+#   import_playbook: deploy.yml
+  # when: jenkins_check is not defined
+
+

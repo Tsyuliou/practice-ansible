@@ -1,0 +1,55 @@
+- name: install dependency 
+  become: yes  
+  yum:
+    name:
+      - httpd-devel
+  changed_when: no
+
+- name: create directory for tomcat
+  become: yes
+  file:
+    path: /opt/tomcat
+    owner: tomcat
+    group: tomcat        
+    mode: 0755        
+    recurse: yes
+    state: directory
+  changed_when: no  
+
+- name: unzip tomcat
+  become: yes
+  become_user: tomcat
+  unarchive:
+    src: "{{ URL_tomcat }}"
+    dest: /opt/tomcat
+    remote_src: yes
+  args:
+    creates: "{{catalina}}"
+  changed_when: no
+
+- name: add tomcat-service
+  become: yes
+  template:
+    src: tomcat.service.j2
+    dest: /etc/systemd/system/tomcat.service
+  notify:
+    - daemon-reload
+    - tomcat-start
+
+- name: add context.xml
+  become: yes
+  template:
+    src: context.xml.j2
+    dest: "{{cont_xml}}"
+  changed_when: no
+  notify:
+    - tomcat-restart
+
+- name: add tomcat-users.xml
+  become: yes
+  template:
+    src: tomcat.users.xml.j2
+    dest: "{{tomcat_users_xml}}"
+  changed_when: no  
+  notify:
+    - tomcat-restart

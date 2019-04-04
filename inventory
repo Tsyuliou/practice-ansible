@@ -10,6 +10,12 @@ sonar ansible_host=192.168.56.10
 nexus ansible_host=192.168.56.20 
 tomcat ansible_host=192.168.56.30
 
+[appServers]
+deploy ansible_host=localhost 
+
+[appServers:vars]
+ansible_connection=local
+
 [all:vars]
 ansible_connection=paramiko
 ansible_user=root

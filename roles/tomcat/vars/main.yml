@@ -3,3 +3,6 @@
 v_t: 17
 URL_tomcat: "http://ftp.byfly.by/pub/apache.org/tomcat/tomcat-9/v9.0.{{v_t}}/bin/apache-tomcat-9.0.{{v_t}}.tar.gz"
 catalina: /opt/tomcat/tomcat/apache-tomcat-9.0.{{v_t}}/bin/catalina.sh
+tom_home: /opt/tomcat/apache-tomcat-9.0.{{v_t}}
+cont_xml: "/opt/tomcat/apache-tomcat-9.0.17/webapps/manager/META-INF/context.xml"
+tomcat_users_xml: "/opt/tomcat/apache-tomcat-9.0.17/conf/tomcat-users.xml"

@@ -1,0 +1,52 @@
+- name: Create or check directory
+  become: yes
+  file:
+    path: /tmp/{{fio}}
+    state: directory
+    mode: 0755
+
+- name: Create or check directory
+  become: yes
+  file:
+    path: /tmp/{{fio}}/lts
+    state: directory
+    mode: 0755
+
+- name: unarchive
+  become: yes
+  unarchive:
+    src: "http://nexus-ci.playpit.by/repository/MNT-pipeline-training/{{ fio }}/pipeline-{{ fio }}/0.0.{{ last }}/pipeline-{{ fio }}-0.0.{{ last }}.tar.gz"
+    dest: "/tmp/{{ fio }}"
+    remote_src: yes 
+
+- name: Deploy to tomcatik
+  become: yes
+  shell: "curl -T '/tmp/{{ fio }}/helloworld-ws/target/helloworld-ws.war' 'http://lexx:123456@192.168.56.30:8080/manager/text/deploy?path=/{{ fio }}&update=true&tag={{ last }}'"
+  register: deploy_output
+  failed_when: '"OK" not in deploy_output.stdout'
+
+- name: undeploy
+  become: yes  
+  shell: curl "http://tomcat:1212@192.168.56.30:8080/manager/text/undeploy?path=/{{ fio }}"
+
+- name: Tomcat health checks
+  become: yes
+  shell: "curl -IL http://tomcat/{{ fio }}"
+  register: check_output
+  changed_when: no
+
+- name: reserv copy
+  become: yes
+  unarchive:
+    force: yes
+    src: "http://nexus-ci.playpit.by/repository/MNT-pipeline-training/{{ fio }}/pipeline-{{ fio }}/0.0.{{ last }}/pipeline-{{ fio }}-0.0.{{ last }}.tar.gz"
+    dest: "/tmp/{{ fio }}/lts"
+    remote_src: yes 
+  when: "'HTTP/1.1 200' in check_output.stdout"
+  
+- name: Rollback
+  become: yes
+  shell: curl --upload-file '/tmp/{{ fio }}/lts/helloworld-ws/target/helloworld-ws.war' 'http://tomcat:1212@192.168.56.30:8080/manager/text/deploy?path=/{{ fio }}&update=true'
+  register: rollback_output
+  failed_when: "'OK' not in rollback_output.stdout"
+  when: "'HTTP/1.1 200' not in check_output.stdout"
