@@ -44,6 +44,8 @@ localhost                          = 192.168.56.1
 #### [constants](roles/constants)
 ### deployTomcat - in this Role we deploy in Tomcat use vars which we need to set up and if something failes we Roleback to previous version which we defined earlier too. Not so good as possible, but first sollution which i could realized
   - "ansible-playbook playbook/playbook.yml --tags=never -e fio="set_name" -e last="set_number_of_last_build" -e lt="set_last_success_version"
+
+  - "ansible-playbook playbooks/custom_deploy.yml" to deploy in tomcat.
  
 #### [deployTomcat](roles/deployTomcat)
 
@@ -89,6 +91,10 @@ localhost                          = 192.168.56.1
 ## File ansible.cfg for review
 
 #### [ansible.cfg](./ansible.cfg)
+
+## Custom "bash module"
+
+#### [custom_module](./roles/mylibrary/library)
 
 
 # If i find time, in this section you'll se facts about all dependency, tools, soft and it versions. But now this sevtion is empty. 
