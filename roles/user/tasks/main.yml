@@ -1,6 +1,6 @@
 ---
 # tasks file for user
-- name: Create  group for user {{ username }} 
+- name: Create  group for user "{{ username }}"
   become: yes
   group:
     name: "{{ username }}"
@@ -16,8 +16,9 @@
     password: "{{ passwd }}"
 
 - name: Add sudoers priveleges  in a separate file
+  become: yes
   copy:
     dest: "/etc/sudoers.d/{{ username }}"
     content: "{{ sudoers }}"
   with_items: "{{ sudoers|default([]) }}"
-  become: yes
+  

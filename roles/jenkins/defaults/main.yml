@@ -3,4 +3,5 @@
 username : jenkins
 passwd: "{{users.jenkins.passwd}}"
 id: "{{users.jenkins.id}}"
+gid: "{{users.jenkins.gid}}"
 sudoers: "{{users.jenkins.sudo}}"

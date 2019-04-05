@@ -3,4 +3,5 @@
 username : sonar
 passwd: "{{users.sonar.passwd}}"
 id: "{{users.sonar.id}}"
+gid: "{{users.jenkins.gid}}"
 sudoers: "{{users.sonar.sudo}}"

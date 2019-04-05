@@ -3,4 +3,5 @@
 username : tomcat
 passwd: "{{users.tomcat.passwd}}"
 id: "{{users.tomcat.id}}"
+gid: "{{users.jenkins.gid}}"
 sudoers: "{{users.tomcat.sudo}}"

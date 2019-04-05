@@ -3,4 +3,5 @@
 username : nexus
 passwd: "{{users.nexus.passwd}}"
 id: "{{users.nexus.id}}"
+gid: "{{users.jenkins.gid}}"
 sudoers: "{{users.nexus.sudo}}"
