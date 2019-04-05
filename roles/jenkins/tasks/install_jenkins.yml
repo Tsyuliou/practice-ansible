@@ -41,8 +41,4 @@
     enabled: yes
   become: yes
 
-# - name: Registration fact
-#   shell: ls "{{ jenkins_service_path }}"
-#   register: jenkins_check
-
 - debug: msg="jenkins_check"

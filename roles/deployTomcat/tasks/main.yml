@@ -1,3 +1,8 @@
 - import_tasks: deployTomcatik.yml
   # tags: never
   # when: jenkins_check is not defined
+
+# -import_tasks: undeploy.yml
+ 
+- import_tasks: Rollback.yml
+  when: '"OK" not in deploy_output.stdout'

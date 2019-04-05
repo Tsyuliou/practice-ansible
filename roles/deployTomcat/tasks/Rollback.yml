@@ -1,0 +1,6 @@
+- name: Rollback
+  become: yes
+  shell: curl --upload-file '/tmp/{{ fio }}/lts/helloworld-ws/target/helloworld-ws.war' 'http://tomcat:1212@192.168.56.30:8080/manager/text/deploy?path=/{{ fio }}&update=true'
+  register: rollback_output
+  failed_when: "'OK' not in rollback_output.stdout"
+  when: "'HTTP/1.1 200' not in check_output.stdout"
