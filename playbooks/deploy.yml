@@ -1,4 +1,0 @@
-- name: Deploy in tomcat from localhost
-  hosts: appServers
-  roles:
-    - deployTomcat    
