@@ -1,12 +1,3 @@
-- hosts: farm
-  become: yes
-  pre_tasks:
-    - name: Create /etc/ansible/facts.d
-      file:
-        path: /etc/ansible/facts.d
-        state: directory
-  tags: pre-install
-
 - name: Add common role to all servers
   hosts: farm
   roles:

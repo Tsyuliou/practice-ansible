@@ -10,3 +10,9 @@
       - git
     state: installed
   changed_when: False  
+
+- name: create directory for custom facts 
+  become: yes  
+  file:
+    path: /etc/ansible/facts.d
+    state: directory
