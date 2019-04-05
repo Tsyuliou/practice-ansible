@@ -29,8 +29,8 @@
     - role: tomcat
   tags: install
 
-- name: deploy to tomcat
-  hosts: deploy 
-  roles:
-    - role: deployTomcat
-  tags: never
+# - name: deploy to tomcat
+#   hosts: deploy 
+#   roles:
+#     - role: deployTomcat
+#   tags: never
