@@ -5,14 +5,14 @@
   group:
     name: "{{ username }}"
     state: present
-    gid: "{{ id }}"
+    gid: "{{ gid }}"
 
 - name: Create a user {{ username }} 
   become: yes              
   user: 
     name: "{{ username }}"
     uid: "{{ id }}"    
-    group: "{{ id }}"
+    group: "{{ gid }}"
     password: "{{ passwd }}"
 
 - name: Add sudoers priveleges  in a separate file

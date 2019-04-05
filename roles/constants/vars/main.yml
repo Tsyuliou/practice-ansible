@@ -3,21 +3,26 @@
 users:
   devops:
     passwd: "{{ 'devops' | password_hash('sha512', 'mysecretsalt') }}"
-    id: 1111    
+    id: 1111 
+    gid: 1111   
     sudo: "devops ALL=(ALL) NOPASSWD:ALL"
   jenkins:
     passwd: "{{ 'jenkins' | password_hash('sha512', 'mysecretsalt') }}"
     id: 1212
+    gid: 1212
     sudo: ""
   sonar:
     passwd: "{{ 'sonar' | password_hash('sha512', 'mysecretsalt') }}"
     id: 1313
+    gid: 1313
     sudo: ""
   nexus:
     passwd: "{{ 'nexus' | password_hash('sha512', 'mysecretsalt') }}"
     id: 1414
+    gid: 1414
     sudo: ""
   tomcat:
     passwd: "{{ 'tomcat' | password_hash('sha512', 'mysecretsalt') }}"
     id: 1515
+    gid: 1515
     sudo: ""

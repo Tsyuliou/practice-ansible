@@ -11,15 +11,15 @@ elif [[ -z "${author}" ]]; then
 	printf '{"failed": true, "author": "Missing required arguments: Set your name"}'
     exit 1
 else
-	curl -T /tmp/atsyuliou/helloworld-ws/target/helloworld-ws.war http://lexx:123456@192.168.56.30:8080/manager/text/deploy?path=/atsyuliou&update=true
-	printf "msg": "%s"
+	curl -T /tmp/${author}/helloworld-ws/target/helloworld-ws.war http://lexx:123456@${tomcat}/manager/text/deploy?path=/${author}&update=true
 	cat << EOF
 	{
 	    "deployed": yes,
 	    "message": Success,
-	    "version": lattest
+	    "version": lattest,
+	    "tomcat": ${tomcat},
+	    "Link": "http://${tomcat}/${author}"
 	}
 EOF
-
-	exit 0
+    exit 0
 fi

@@ -8,9 +8,9 @@
 - name: create directory for tomcat
   become: yes
   file:
-    path: /opt/tomcat
-    owner: tomcat
-    group: tomcat        
+    path: "{{tomcat_home}}"
+    owner: "{{username}}"
+    group: "{{username}}"        
     mode: 0755        
     recurse: yes
     state: directory
@@ -18,13 +18,13 @@
 
 - name: unzip tomcat
   become: yes
-  become_user: tomcat
+  become_user: "{{username}}"
   unarchive:
     src: "{{ URL_tomcat }}"
-    dest: /opt/tomcat
+    dest: "{{tomcat_home}}"
     remote_src: yes
   args:
-    creates: "{{catalina}}"
+    creates: "{{catalina_home}}"
   changed_when: no
 
 - name: add tomcat-service

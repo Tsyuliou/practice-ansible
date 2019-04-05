@@ -4,6 +4,6 @@
       deploy:
         tomcat: "192.168.56.30:8080"
         Build_number: 66
-        author: atsyuliou      
-      ignore_errors: yes
-      # failed_when: rc == 1
+        author: atsyuliou  
+      register: myResult
+      failed_when: myResult.rc == 1     
